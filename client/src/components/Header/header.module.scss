@@ -7,8 +7,6 @@ $pading-title: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-
-  border: 2px solid red;
 }
 
 .title_page {
@@ -31,11 +29,14 @@ $pading-title: 10px;
 
 .title_warning {
   height: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0px;
 
   h5 {
     padding: 0px $pading-title;
     color: red;
     background-color: rgba(201, 0, 0, 0.2);
-    padding: 2px 0px;
   }
 }

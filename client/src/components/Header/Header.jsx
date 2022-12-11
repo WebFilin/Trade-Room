@@ -7,7 +7,7 @@ function Header() {
   const dataTrade = "09.11.2020";
   const timeTrade = "07:00";
   const warning =
-    "Уважаемые участники, во время вашего хода вы можете изменить параметры торгов, указанные в таблице:";
+    "Уважаемые участники, во время вашего хода вы можете изменить параметры торгов указанные в таблице:";
 
   return (
     <article className={styles.wrapper}>
@@ -18,9 +18,9 @@ function Header() {
             {`${titleTrade} (${dataTrade} ${timeTrade})`}
           </span>
         </div>
-      </section>
-      <section className={styles.title_warning}>
-        <h5>{warning} </h5>
+        <div className={styles.title_warning}>
+          <h5>{warning} </h5>
+        </div>
       </section>
     </article>
   );
