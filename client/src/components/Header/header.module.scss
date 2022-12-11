@@ -1,0 +1,41 @@
+$pading-title: 10px;
+
+.wrapper {
+  box-sizing: border-box;
+  width: 98vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  border: 2px solid red;
+}
+
+.title_page {
+  width: 100vw;
+  margin-top: 20px;
+
+  .title_main {
+    display: flex;
+    padding: 0px $pading-title;
+    color: red;
+    padding-bottom: 20px;
+    border-bottom: 1px solid gray;
+  }
+
+  .title_request {
+    text-indent: 5px;
+    color: rgb(215, 52, 52);
+  }
+}
+
+.title_warning {
+  height: 20px;
+
+  h5 {
+    padding: 0px $pading-title;
+    color: red;
+    background-color: rgba(201, 0, 0, 0.2);
+    padding: 2px 0px;
+  }
+}
