@@ -6,24 +6,35 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Описываем схему сушьности постов
-const postShema = new Schema({
-  text: {
-    type: String,
-    // Поле является обязательным
-    required: true,
-  },
-  author: {
+const biddersShema = new Schema({
+  name: {
     type: String,
     required: true,
   },
-  title: {
+
+  price: {
+    type: String,
+    required: true,
+  },
+
+  guarantee: {
+    type: String,
+    required: true,
+  },
+
+  termsPayment: {
+    type: String,
+    required: true,
+  },
+
+  productionTime: {
     type: String,
     required: true,
   },
 });
 
 // Передаем схему в модель
-const Post = mongoose.model("Post", postShema);
+const Bidders = mongoose.model("Bidders", biddersShema);
 
 // Экспортируем модель
-module.exports = Post;
+module.exports = Bidders;

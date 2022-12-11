@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 
 //модель для базы данных
-const Bidders = require("./models/post");
+const Bidders = require("./models/bidders");
 
 // Политика CORS - отключаем
 const cors = require("cors");
@@ -25,7 +25,7 @@ const PORT = 4000;
 
 //База данных - доступ
 const db =
-  "mongodb+srv://WebFilin:Pas321@cluster0.iyjr44f.mongodb.net/nodeBlog?retryWrites=true&w=majority";
+  "mongodb+srv://Lotus:Pass321@cluster0.iyjr44f.mongodb.net/TradeRoom?retryWrites=true&w=majority";
 
 mongoose.set("strictQuery", true);
 
@@ -51,6 +51,13 @@ app.listen(PORT, () => {
   console.log(`listening port ${PORT}`);
 });
 
+// Получаем данные из БД и отдаем в UI
 app.get("/", (req, res) => {
-  Bidders.find().then((result) => res.json(result));
+  //   Bidders.find().then((result) => res.json(result));
+  res.json([]);
+});
+
+// Имитация отсутвия юзеров
+app.get("/zerousers", (req, res) => {
+  res.json([]);
 });
