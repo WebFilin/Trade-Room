@@ -31,6 +31,10 @@ const biddersShema = new Schema({
     type: String,
     required: true,
   },
+  isMove: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 // Передаем схему в модель

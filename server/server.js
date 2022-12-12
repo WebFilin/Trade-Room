@@ -53,8 +53,7 @@ app.listen(PORT, () => {
 
 // Получаем данные из БД и отдаем в UI по get
 app.get("/", (req, res) => {
-  //   Bidders.find().then((result) => res.json(result));
-  res.json([]);
+  Bidders.find().then((result) => res.json(result));
 });
 
 // Имитация отсутвия юзеров

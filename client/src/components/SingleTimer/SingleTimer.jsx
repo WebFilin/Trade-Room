@@ -5,7 +5,7 @@ import Timer from "../Timer/Timer";
 function SingleTimer({ timeLimitMin }) {
   return (
     <section className={styles.wrapper}>
-      <section className={styles.title_page}>
+      <section className={styles.body}>
         <Timer timeLimitMin={timeLimitMin} />
       </section>
     </section>

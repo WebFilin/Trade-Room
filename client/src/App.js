@@ -24,7 +24,7 @@ function App() {
         console.log("Ошибка HTTP: " + response.status);
       }
     }
-    //  checkUsers();
+     checkUsers();
   }, []);
 
   return (
@@ -37,7 +37,9 @@ function App() {
         <SidebarTradeRoom />
         {/* {users.length > 0 ? <TradeUsers users={users} timeLimitMin={TIME_LIMIT_MIN} /> : <SingleTimer />}
          */}
-        <SingleTimer timeLimitMin={TIME_LIMIT_MIN} />
+        {/* <SingleTimer timeLimitMin={TIME_LIMIT_MIN} /> */}
+
+        <TradeUsers users={users} timeLimitMin={TIME_LIMIT_MIN} />
       </section>
     </main>
   );

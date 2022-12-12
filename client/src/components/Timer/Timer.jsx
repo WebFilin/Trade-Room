@@ -12,7 +12,7 @@ function Timer({ timeLimitMin }) {
       return <Countdown date={Date.now() + time} renderer={renderer} />;
     } else {
       return (
-        <div>
+        <div className={styles.timer}>
           {zeroPad(minutes)}:{zeroPad(seconds)}
         </div>
       );
@@ -21,7 +21,7 @@ function Timer({ timeLimitMin }) {
 
   return (
     <section className={styles.wrapper}>
-      <section className={styles.title_page}>
+      <section className={styles.body}>
         <Countdown date={Date.now() + time} renderer={renderer} />
       </section>
     </section>

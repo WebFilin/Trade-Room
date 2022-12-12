@@ -1,8 +1,10 @@
 .wrapper {
   box-sizing: border-box;
-//   width: 98vw;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: flex-start;
+  width: 90vw;
+  height: 60vh;
+  border: 2px solid black;
+}
+
+.body {
+  padding: 50px 50%;
 }
