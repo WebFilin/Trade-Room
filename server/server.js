@@ -39,7 +39,7 @@ mongoose
     console.log(error);
   });
 
-//   Управление политикой CORS
+// Управление CORS
 app.use(cors(corsOptions));
 
 // Логи сервера
@@ -51,13 +51,13 @@ app.listen(PORT, () => {
   console.log(`listening port ${PORT}`);
 });
 
-// Получаем данные из БД и отдаем в UI
+// Получаем данные из БД и отдаем в UI по get
 app.get("/", (req, res) => {
   //   Bidders.find().then((result) => res.json(result));
   res.json([]);
 });
 
 // Имитация отсутвия юзеров
-app.get("/zerousers", (req, res) => {
+app.get("/nousers", (req, res) => {
   res.json([]);
 });

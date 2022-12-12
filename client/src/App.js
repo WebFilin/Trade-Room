@@ -10,19 +10,21 @@ function App() {
 
   const URL = "http://localhost:4000/";
 
+  //Старт таймера в минутах
+  const TIME_LIMIT_MIN = 2;
+
   //   Проверяем наличие пользователей
   React.useEffect(() => {
     async function checkUsers() {
       const response = await fetch(URL);
       if (response.ok) {
         const users = await response.json();
-        console.log(users);
         setUsers(users);
       } else {
         console.log("Ошибка HTTP: " + response.status);
       }
     }
-    checkUsers();
+    //  checkUsers();
   }, []);
 
   return (
@@ -33,7 +35,9 @@ function App() {
 
       <section className={styles.trade_room}>
         <SidebarTradeRoom />
-        {users.length > 0 ? <TradeUsers users={users} /> : <SingleTimer />}
+        {/* {users.length > 0 ? <TradeUsers users={users} timeLimitMin={TIME_LIMIT_MIN} /> : <SingleTimer />}
+         */}
+        <SingleTimer timeLimitMin={TIME_LIMIT_MIN} />
       </section>
     </main>
   );
