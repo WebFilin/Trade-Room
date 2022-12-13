@@ -29,6 +29,7 @@ $pading-title: 10px;
   .table_td_timer {
     text-align: center;
     color: blue;
+    line-height: 60px;
 
     td {
       :first-child {
@@ -38,12 +39,13 @@ $pading-title: 10px;
       }
     }
   }
+
+  tr:nth-child(odd) {
+    background-color: #f1f1f1;
+  }
 }
 
 .table_row__user_name {
   text-align: center;
   color: blue;
-  td {
-    //  background: wheat;
-  }
 }
