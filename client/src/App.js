@@ -1,19 +1,19 @@
 import React from "react";
 import styles from "./app.module.scss";
 import Header from "./components/Header/Header";
-import SidebarTradeRoom from "./components/SidebarTradeRoom/SidebarTradeRoom";
 import SingleTimer from "./components/SingleTimer/SingleTimer";
-import TradeUsers from "./components/TradeUsers/TradeUsers";
+import TradeRoom from "./components/TradeUsers/TradeRoom";
 
 function App() {
   const [users, setUsers] = React.useState([]);
 
+  //Отсчет таймера, минуты
+  const TIME_LIMIT_MIN = 2;
+  const time = TIME_LIMIT_MIN * 60 * 1000;
+
   const URL = "http://localhost:4000/";
 
-  //Старт таймера в минутах
-  const TIME_LIMIT_MIN = 2;
-
-  //   Проверяем наличие пользователей
+  //Проверяем наличие пользователей
   React.useEffect(() => {
     async function checkUsers() {
       const response = await fetch(URL);
@@ -24,7 +24,7 @@ function App() {
         console.log("Ошибка HTTP: " + response.status);
       }
     }
-     checkUsers();
+    checkUsers();
   }, []);
 
   return (
@@ -33,14 +33,11 @@ function App() {
         <Header />
       </header>
 
-      <section className={styles.trade_room}>
-        <SidebarTradeRoom />
-        {/* {users.length > 0 ? <TradeUsers users={users} timeLimitMin={TIME_LIMIT_MIN} /> : <SingleTimer />}
-         */}
-        {/* <SingleTimer timeLimitMin={TIME_LIMIT_MIN} /> */}
+      <article className={styles.trade_room}>
+        {/* <SingleTimer  timeLimitMin={ time}/> */}
 
-        <TradeUsers users={users} timeLimitMin={TIME_LIMIT_MIN} />
-      </section>
+        <TradeRoom users={users} timeLimitMin={time} />
+      </article>
     </main>
   );
 }
