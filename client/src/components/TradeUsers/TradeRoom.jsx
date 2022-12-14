@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./tradeRoom.module.scss";
+import shortid from "shortid";
 import Timer from "../Timer/Timer";
 
 function TradeUsers({ users, timeLimitMin }) {
   const [arrUsers, setArrUsers] = React.useState([]);
-  const [tableColumns, setTableColumns] = React.useState([]);
 
   // Моковые данные - получать от сервера
   const dataMenu = [
@@ -22,11 +22,13 @@ function TradeUsers({ users, timeLimitMin }) {
     { id: 8, title: "Действия" },
   ];
 
+  if (users.length > 0) {
+    users[1].isMove = true;
+  }
+
   React.useEffect(() => {
     setArrUsers(users);
   }, [users]);
-
-  console.log(users);
 
   return (
     <section className={styles.wrapper}>
@@ -34,11 +36,11 @@ function TradeUsers({ users, timeLimitMin }) {
         <tbody className={styles.table_body}>
           {/*  */}
           <tr className={styles.table_td_timer}>
-            {dataMenu[0].title}
-            {arrUsers.map(() => {
+            <td>{dataMenu[0].title}</td>
+            {arrUsers.map(({ isMove }) => {
               return (
-                <td>
-                  <Timer timeLimitMin={timeLimitMin} />
+                <td key={shortid.generate()}>
+                  {isMove ? <Timer timeLimitMin={timeLimitMin} /> : "Нет"}
                 </td>
               );
             })}
@@ -46,51 +48,51 @@ function TradeUsers({ users, timeLimitMin }) {
 
           <tr className={styles.table_row__user_name}>
             <td>{dataMenu[1].title}</td>
-            {arrUsers.map(({ name }) => {
-              return <td> {name}</td>;
+            {arrUsers.map(({ name, isMove }) => {
+              return <td key={shortid.generate()}> {name}</td>;
             })}
           </tr>
 
           <tr>
             <td>{dataMenu[2].title}</td>
-            {arrUsers.map(({ qualityStandards }) => {
-              return <td> {qualityStandards}</td>;
+            {arrUsers.map(({ qualityStandards, isMove }) => {
+              return <td key={shortid.generate()}> {qualityStandards}</td>;
             })}
           </tr>
 
           <tr>
             <td>{dataMenu[3].title}</td>
-            {arrUsers.map(({ productionTime }) => {
-              return <td> {productionTime}</td>;
+            {arrUsers.map(({ productionTime, isMove }) => {
+              return <td key={shortid.generate()}> {productionTime}</td>;
             })}
           </tr>
 
           <tr>
             <td>{dataMenu[4].title}</td>
-            {arrUsers.map(({ guarantee }) => {
-              return <td> {guarantee}</td>;
+            {arrUsers.map(({ guarantee, isMove }) => {
+              return <td key={shortid.generate()}> {guarantee}</td>;
             })}
           </tr>
 
           <tr>
             <td>{dataMenu[5].title}</td>
-            {arrUsers.map(({ termsPayment }) => {
-              return <td> {termsPayment}</td>;
+            {arrUsers.map(({ termsPayment, isMove }) => {
+              return <td key={shortid.generate()}> {termsPayment}</td>;
             })}
           </tr>
 
           <tr>
             <td>{dataMenu[6].title}</td>
-            {arrUsers.map(({ price }) => {
-              return <td> {price}</td>;
+            {arrUsers.map(({ price, isMove }) => {
+              return <td key={shortid.generate()}> {price}</td>;
             })}
           </tr>
 
           <tr>
             <td>{dataMenu[7].title}</td>
-            {arrUsers.map(({}) => {
-              return <td></td>;
-            })}
+            {/* {arrUsers.map(({ }) => {
+              return <td key={shortid.generate()}></td>;
+            })} */}
           </tr>
         </tbody>
       </table>

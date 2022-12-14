@@ -7,16 +7,21 @@ import TradeRoom from "./components/TradeUsers/TradeRoom";
 function App() {
   const [users, setUsers] = React.useState([]);
 
-  //Отсчет таймера, минуты
+  // Отсчет таймера, минуты
   const TIME_LIMIT_MIN = 2;
+
+  const URL = "http://localhost:4000";
+  const USERS = "/users";
+
+  // Заголовки лотов торгов
+  const TITLES_TRADE = "/titles_trade";
+
   const time = TIME_LIMIT_MIN * 60 * 1000;
 
-  const URL = "http://localhost:4000/";
-
-  //Проверяем наличие пользователей
+  // Проверяем наличие пользователей
   React.useEffect(() => {
     async function checkUsers() {
-      const response = await fetch(URL);
+      const response = await fetch(URL + USERS);
       if (response.ok) {
         const users = await response.json();
         setUsers(users);

@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 
 const morgan = require("morgan");
 
@@ -23,7 +22,7 @@ const app = express();
 
 const PORT = 4000;
 
-//База данных - доступ
+//База данных
 const db =
   "mongodb+srv://Lotus:Pass321@cluster0.iyjr44f.mongodb.net/TradeRoom?retryWrites=true&w=majority";
 
@@ -52,11 +51,15 @@ app.listen(PORT, () => {
 });
 
 // Получаем данные из БД и отдаем в UI по get
-app.get("/", (req, res) => {
+app.get("/users", (req, res) => {
   Bidders.find().then((result) => res.json(result));
 });
 
+app.get("/titles_trade", (req, res) => {
+  // Bidders.find().then((result) => res.json(result));
+});
+
 // Имитация отсутвия юзеров
-app.get("/nousers", (req, res) => {
+app.get("/no_users", (req, res) => {
   res.json([]);
 });
