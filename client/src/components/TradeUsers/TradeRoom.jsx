@@ -5,6 +5,7 @@ import Timer from "../Timer/Timer";
 
 function TradeUsers({ users, timeLimitMin }) {
   const [arrUsers, setArrUsers] = React.useState([]);
+  const [stepBid, setStepBid] = React.useState(0);
 
   // Моковые данные - получать от сервера
   const dataMenu = [
@@ -22,25 +23,46 @@ function TradeUsers({ users, timeLimitMin }) {
     { id: 8, title: "Действия" },
   ];
 
-  if (users.length > 0) {
-    users[1].isMove = true;
-  }
-
   React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (stepBid < users.length) {
+        setStepBid((prevCount) => prevCount + 1);
+      } else {
+        setStepBid((prevCount) => (prevCount = 0));
+      }
+    }, 4000);
+
+    console.log(stepBid);
+
+    return () => clearInterval(interval);
+  }, [stepBid, users]);
+
+  //Перемещаем таймер перехода хода по ячейкам
+  React.useEffect(() => {
+    if (users.length > 0) {
+      users.forEach((items, index) => {
+        if (stepBid === index) {
+          items.isMove = true;
+        } else {
+          items.isMove = false;
+        }
+      });
+    }
+
     setArrUsers(users);
-  }, [users]);
+  }, [users, stepBid]);
 
   return (
     <section className={styles.wrapper}>
       <table className={styles.table}>
         <tbody className={styles.table_body}>
-          {/*  */}
           <tr className={styles.table_td_timer}>
             <td>{dataMenu[0].title}</td>
             {arrUsers.map(({ isMove }) => {
               return (
                 <td key={shortid.generate()}>
                   {isMove ? <Timer timeLimitMin={timeLimitMin} /> : "Нет"}
+                  {/* {isMove ? "Да" : "Нет"} */}
                 </td>
               );
             })}
@@ -90,7 +112,7 @@ function TradeUsers({ users, timeLimitMin }) {
 
           <tr>
             <td>{dataMenu[7].title}</td>
-            {/* {arrUsers.map(({ }) => {
+            {/* {arrUsers.map(() => {
               return <td key={shortid.generate()}></td>;
             })} */}
           </tr>
