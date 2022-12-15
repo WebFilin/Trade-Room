@@ -77,35 +77,70 @@ function TradeUsers({ traders, timeCountdown }) {
           <tr className={styles.table_row__user_name}>
             <td>{dataMenu.params}</td>
             {arrTraders.map(({ name, isMove }) => {
-              return <td key={shortid.generate()}> {name}</td>;
+              return (
+                <td
+                  key={shortid.generate()}
+                  className={isMove ? null : styles.disabled}
+                >
+                  {name}
+                </td>
+              );
             })}
           </tr>
 
           <tr>
             <td>{dataMenu.setOfMeasures}</td>
             {arrTraders.map(({ qualityStandards, isMove }) => {
-              return <td key={shortid.generate()}> {qualityStandards}</td>;
+              return (
+                <td
+                  key={shortid.generate()}
+                  className={isMove ? null : styles.disabled}
+                >
+                  {qualityStandards}
+                </td>
+              );
             })}
           </tr>
 
           <tr>
             <td>{dataMenu.timeCreate}</td>
             {arrTraders.map(({ productionTime, isMove }) => {
-              return <td key={shortid.generate()}> {productionTime}</td>;
+              return (
+                <td
+                  key={shortid.generate()}
+                  className={isMove ? null : styles.disabled}
+                >
+                  {productionTime}
+                </td>
+              );
             })}
           </tr>
 
           <tr>
             <td>{dataMenu.guarantee}</td>
             {arrTraders.map(({ guarantee, isMove }) => {
-              return <td key={shortid.generate()}> {guarantee}</td>;
+              return (
+                <td
+                  key={shortid.generate()}
+                  className={isMove ? null : styles.disabled}
+                >
+                  {guarantee}
+                </td>
+              );
             })}
           </tr>
 
           <tr>
             <td>{dataMenu.payment}</td>
             {arrTraders.map(({ termsPayment, isMove }) => {
-              return <td key={shortid.generate()}> {termsPayment}</td>;
+              return (
+                <td
+                  key={shortid.generate()}
+                  className={isMove ? null : styles.disabled}
+                >
+                  {termsPayment}
+                </td>
+              );
             })}
           </tr>
 
@@ -113,7 +148,10 @@ function TradeUsers({ traders, timeCountdown }) {
             <td>{dataMenu.price}</td>
             {arrTraders.map(({ price, isMove }) => {
               return (
-                <td key={shortid.generate()}>
+                <td
+                  key={shortid.generate()}
+                  className={isMove ? null : styles.disabled}
+                >
                   {price &&
                     price.map((items) => {
                       return <p key={shortid.generate()}>{items}</p>;
@@ -125,8 +163,15 @@ function TradeUsers({ traders, timeCountdown }) {
 
           <tr>
             <td>{dataMenu.actions}</td>
-            {arrTraders.map(() => {
-              return <td key={shortid.generate()}>-</td>;
+            {arrTraders.map(({ isMove }) => {
+              return (
+                <td
+                  key={shortid.generate()}
+                  className={isMove ? null : styles.disabled}
+                >
+                  -
+                </td>
+              );
             })}
           </tr>
         </tbody>
