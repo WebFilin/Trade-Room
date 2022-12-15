@@ -26,6 +26,30 @@ function App() {
     getTraders();
   }, []);
 
+  //   Тестовые функции для разных режимов комнаты
+  function noTraders() {
+    setTraders([]);
+  }
+
+  function threeTraders() {
+    if (traders.length > 0) {
+      const arrThreeTraders = traders.slice(0, 3);
+      setTraders(arrThreeTraders);
+    } else {
+      alert("Нет трейдеров на торгах");
+    }
+  }
+
+  async function allTraders(params) {
+    const response = await fetch(variables.URL + variables.TRADERS);
+    if (response.ok) {
+      const arrTraders = await response.json();
+      setTraders(arrTraders);
+    } else {
+      console.log("Ошибка HTTP: " + response.status);
+    }
+  }
+
   return (
     <main className={styles.app}>
       <header className={styles.header}>
@@ -39,6 +63,19 @@ function App() {
           <SingleTimer timeCountdown={timeCountdown} />
         )}
       </article>
+      <section className={styles.wrapper_btns}>
+        <p>Кнопки для тестирования приложения</p>
+        <button className={styles.btn} onClick={allTraders}>
+          Все трейдеры
+        </button>
+
+        <button className={styles.btn} onClick={noTraders}>
+          Нет трейдеров
+        </button>
+        <button className={styles.btn} onClick={threeTraders}>
+          Три трейдера
+        </button>
+      </section>
     </main>
   );
 }
