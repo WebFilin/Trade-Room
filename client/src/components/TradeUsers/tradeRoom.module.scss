@@ -66,5 +66,12 @@ $pading-title: 10px;
 
 .disabled {
   color: gray;
-  
+}
+
+.table_row__price {
+  .disabled {
+    p {
+      color: gray;
+    }
+  }
 }
