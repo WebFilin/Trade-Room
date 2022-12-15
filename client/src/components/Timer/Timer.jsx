@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./timer.module.scss";
 import Countdown, { zeroPad } from "react-countdown";
 
-function Timer({ timeLimitMin }) {
+function Timer({ timeCountdown }) {
   // Расчитываем время в минутах
   //   const time = timeLimitMin * 60 * 1000;
   let time = 10000;

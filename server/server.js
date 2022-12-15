@@ -51,11 +51,11 @@ app.listen(PORT, () => {
 });
 
 // Получаем данные из БД и отдаем в UI по get
-app.get("/users", (req, res) => {
+app.get("/traders", (req, res) => {
   Bidders.find().then((result) => res.json(result));
 });
 
-app.get("/titles_trade", (req, res) => {
+app.get("/limit_traders", (req, res) => {
   // Bidders.find().then((result) => res.json(result));
 });
 

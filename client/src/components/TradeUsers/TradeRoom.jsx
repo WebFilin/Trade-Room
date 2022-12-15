@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./tradeRoom.module.scss";
 import shortid from "shortid";
 import Timer from "../Timer/Timer";
+// import useInterval from "../useInterval/useInterval";
 
 function TradeUsers({ users, timeLimitMin }) {
   const [arrUsers, setArrUsers] = React.useState([]);
@@ -23,22 +24,9 @@ function TradeUsers({ users, timeLimitMin }) {
     { id: 8, title: "Действия" },
   ];
 
+  //Перемещаем таймер по ячейкам, очищаем ячейки
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (stepBid < users.length) {
-        setStepBid((prevCount) => prevCount + 1);
-      } else {
-        setStepBid((prevCount) => (prevCount = 0));
-      }
-    }, 4000);
-
     console.log(stepBid);
-
-    return () => clearInterval(interval);
-  }, [stepBid, users]);
-
-  //Перемещаем таймер перехода хода по ячейкам
-  React.useEffect(() => {
     if (users.length > 0) {
       users.forEach((items, index) => {
         if (stepBid === index) {
@@ -50,7 +38,7 @@ function TradeUsers({ users, timeLimitMin }) {
     }
 
     setArrUsers(users);
-  }, [users, stepBid]);
+  }, [stepBid, users]);
 
   return (
     <section className={styles.wrapper}>
@@ -61,8 +49,7 @@ function TradeUsers({ users, timeLimitMin }) {
             {arrUsers.map(({ isMove }) => {
               return (
                 <td key={shortid.generate()}>
-                  {isMove ? <Timer timeLimitMin={timeLimitMin} /> : "Нет"}
-                  {/* {isMove ? "Да" : "Нет"} */}
+                  {isMove ? <Timer timeLimitMin={timeLimitMin} /> : null}
                 </td>
               );
             })}
