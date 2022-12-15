@@ -18,8 +18,6 @@ function App() {
       const response = await fetch(variables.URL + variables.TRADERS);
       if (response.ok) {
         const arrTraders = await response.json();
-
-        console.log(arrTraders);
         setTraders(arrTraders);
       } else {
         console.log("Ошибка HTTP: " + response.status);

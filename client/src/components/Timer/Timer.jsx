@@ -3,8 +3,6 @@ import styles from "./timer.module.scss";
 import Countdown, { zeroPad } from "react-countdown";
 
 function Timer({ timeCountdown }) {
-  // Расчитываем время в минутах
-
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       return (

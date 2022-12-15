@@ -9,6 +9,9 @@ const variables = {
   //   Заголовки лота
   TITLES_MENU_ROOM: "/traders_menu_room",
 
+  // Заголовок команты
+  ROOM_TITLE: "/traders_room_title",
+
   // Количество трейдеров в лоте
   LIMIT_TRADE: "/limit_traders",
 };

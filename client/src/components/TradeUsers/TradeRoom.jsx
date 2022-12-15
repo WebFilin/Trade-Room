@@ -19,8 +19,6 @@ function TradeUsers({ traders, timeCountdown }) {
       const response = await fetch(variables.URL + variables.TITLES_MENU_ROOM);
       if (response.ok) {
         const arrTraders = await response.json();
-
-        console.log(...arrTraders);
         setDataMenu(...arrTraders);
       } else {
         console.log("Ошибка HTTP: " + response.status);

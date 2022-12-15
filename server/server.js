@@ -72,6 +72,15 @@ app.get("/traders_menu_room", (req, res) => {
     });
 });
 
+// Заголовок торговой комнаты
+app.get("/traders_room_title", (req, res) => {
+  const titleTrade = "Тестовые торги на аппарат ЛОТОС №2033564";
+  const dataTrade = "09.11.2020";
+  const timeTrade = "07:00";
+
+  res.json(titleTrade + " " + dataTrade + " " + timeTrade);
+});
+
 app.get("/limit_traders", (req, res) => {});
 
 // Имитация отсутвия юзеров
