@@ -2,33 +2,52 @@ import React from "react";
 import styles from "./tradeRoom.module.scss";
 import shortid from "shortid";
 import Timer from "../Timer/Timer";
-// import useInterval from "../useInterval/useInterval";
+import useInterval from "../useInterval/useInterval";
+import variables from "../../variables/variables";
 
-function TradeUsers({ users, timeLimitMin }) {
-  const [arrUsers, setArrUsers] = React.useState([]);
-  const [stepBid, setStepBid] = React.useState(0);
+function TradeUsers({ traders, timeCountdown }) {
+  const [arrTraders, setArrTraders] = React.useState([]);
 
-  // Моковые данные - получать от сервера
-  const dataMenu = [
-    { id: 1, title: "Ход" },
-    { id: 2, title: "Параметры и требования" },
-    {
-      id: 3,
-      title:
-        "Наличие комплекса мероприятий, повыщающих стандарты качества изготовления",
-    },
-    { id: 4, title: "Срок изготовления лота, дней" },
-    { id: 5, title: "Гарантийные обязательства" },
-    { id: 6, title: "Условия оплаты" },
-    { id: 7, title: "Стоимость изготовления лота руб (без НДС)" },
-    { id: 8, title: "Действия" },
-  ];
+  //   Переход хода
+  const [stepBid, setStepBid] = React.useState(1);
 
-  //Перемещаем таймер по ячейкам, очищаем ячейки
+  //   Меню команты торгов
+  const [dataMenu, setDataMenu] = React.useState({});
+
   React.useEffect(() => {
-    console.log(stepBid);
-    if (users.length > 0) {
-      users.forEach((items, index) => {
+    async function getTitlesMenuRoom() {
+      const response = await fetch(variables.URL + variables.TITLES_MENU_ROOM);
+      if (response.ok) {
+        const arrTraders = await response.json();
+
+        console.log(...arrTraders);
+        setDataMenu(...arrTraders);
+      } else {
+        console.log("Ошибка HTTP: " + response.status);
+      }
+    }
+
+    getTitlesMenuRoom();
+  }, []);
+
+  //   Отображаем таймер в первой ячейке при загрузке
+  React.useEffect(() => {
+    if (traders.length > 0) {
+      traders[0].isMove = true;
+    }
+  }, [traders]);
+
+  // Задаем интервал
+  useInterval(() => {
+    if (stepBid <= traders.length - 2) {
+      setStepBid((setTime) => setTime + 1);
+    } else {
+      setStepBid((setTime) => (setTime = 0));
+    }
+
+    //Включаем блок таймера в заданной ячейке
+    if (traders.length > 0) {
+      traders.forEach((items, index) => {
         if (stepBid === index) {
           items.isMove = true;
         } else {
@@ -36,72 +55,81 @@ function TradeUsers({ users, timeLimitMin }) {
         }
       });
     }
+  }, timeCountdown);
 
-    setArrUsers(users);
-  }, [stepBid, users]);
+  React.useEffect(() => {
+    setArrTraders(traders);
+  }, [traders]);
 
   return (
     <section className={styles.wrapper}>
       <table className={styles.table}>
         <tbody className={styles.table_body}>
           <tr className={styles.table_td_timer}>
-            <td>{dataMenu[0].title}</td>
-            {arrUsers.map(({ isMove }) => {
+            <td>{dataMenu.move}</td>
+            {arrTraders.map(({ isMove }) => {
               return (
                 <td key={shortid.generate()}>
-                  {isMove ? <Timer timeLimitMin={timeLimitMin} /> : null}
+                  {isMove ? <Timer timeCountdown={timeCountdown} /> : null}
                 </td>
               );
             })}
           </tr>
 
           <tr className={styles.table_row__user_name}>
-            <td>{dataMenu[1].title}</td>
-            {arrUsers.map(({ name, isMove }) => {
+            <td>{dataMenu.params}</td>
+            {arrTraders.map(({ name, isMove }) => {
               return <td key={shortid.generate()}> {name}</td>;
             })}
           </tr>
 
           <tr>
-            <td>{dataMenu[2].title}</td>
-            {arrUsers.map(({ qualityStandards, isMove }) => {
+            <td>{dataMenu.setOfMeasures}</td>
+            {arrTraders.map(({ qualityStandards, isMove }) => {
               return <td key={shortid.generate()}> {qualityStandards}</td>;
             })}
           </tr>
 
           <tr>
-            <td>{dataMenu[3].title}</td>
-            {arrUsers.map(({ productionTime, isMove }) => {
+            <td>{dataMenu.timeCreate}</td>
+            {arrTraders.map(({ productionTime, isMove }) => {
               return <td key={shortid.generate()}> {productionTime}</td>;
             })}
           </tr>
 
           <tr>
-            <td>{dataMenu[4].title}</td>
-            {arrUsers.map(({ guarantee, isMove }) => {
+            <td>{dataMenu.guarantee}</td>
+            {arrTraders.map(({ guarantee, isMove }) => {
               return <td key={shortid.generate()}> {guarantee}</td>;
             })}
           </tr>
 
           <tr>
-            <td>{dataMenu[5].title}</td>
-            {arrUsers.map(({ termsPayment, isMove }) => {
+            <td>{dataMenu.payment}</td>
+            {arrTraders.map(({ termsPayment, isMove }) => {
               return <td key={shortid.generate()}> {termsPayment}</td>;
             })}
           </tr>
 
           <tr>
-            <td>{dataMenu[6].title}</td>
-            {arrUsers.map(({ price, isMove }) => {
-              return <td key={shortid.generate()}> {price}</td>;
+            <td>{dataMenu.price}</td>
+            {arrTraders.map(({ price, isMove }) => {
+              return (
+                <td key={shortid.generate()}>
+                  {price &&
+                    price.map((items) => {
+                      return <p key={shortid.generate()}>{items}</p>;
+                    })}
+                </td>
+              );
             })}
           </tr>
 
           <tr>
-            <td>{dataMenu[7].title}</td>
-            {/* {arrUsers.map(() => {
-              return <td key={shortid.generate()}></td>;
-            })} */}
+            <td>{dataMenu.actions}</td>
+            {arrTraders.map(() => {
+              return <td key={shortid.generate()}>-</td>;
+            })}
           </tr>
         </tbody>
       </table>

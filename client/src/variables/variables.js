@@ -6,6 +6,9 @@ const variables = {
   URL: "http://localhost:4000",
   TRADERS: "/traders",
 
+  //   Заголовки лота
+  TITLES_MENU_ROOM: "/traders_menu_room",
+
   // Количество трейдеров в лоте
   LIMIT_TRADE: "/limit_traders",
 };

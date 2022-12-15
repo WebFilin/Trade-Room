@@ -4,12 +4,12 @@ import Countdown, { zeroPad } from "react-countdown";
 
 function Timer({ timeCountdown }) {
   // Расчитываем время в минутах
-  //   const time = timeLimitMin * 60 * 1000;
-  let time = 10000;
 
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
-      return <Countdown date={Date.now() + time} renderer={renderer} />;
+      return (
+        <Countdown date={Date.now() + timeCountdown} renderer={renderer} />
+      );
     } else {
       return (
         <div className={styles.timer}>
@@ -22,7 +22,7 @@ function Timer({ timeCountdown }) {
   return (
     <section className={styles.wrapper}>
       <section className={styles.body}>
-        <Countdown date={Date.now() + time} renderer={renderer} />
+        <Countdown date={Date.now() + timeCountdown} renderer={renderer} />
       </section>
     </section>
   );

@@ -19,7 +19,7 @@ $pading-title: 10px;
 .table_body {
   td {
     padding: 8px;
-    //  background: rgb(0, 255, 13);
+    min-width: 200px;
   }
 
   td:not(:first-child) {

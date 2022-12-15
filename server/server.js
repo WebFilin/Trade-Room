@@ -6,7 +6,9 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 
 //модель для базы данных
-const Bidders = require("./models/bidders");
+const TradeShema = require("./models/traders");
+
+const TitlesMenuRoom = require("./models/titlesMenuRoom");
 
 // Политика CORS - отключаем
 const cors = require("cors");
@@ -30,7 +32,7 @@ mongoose.set("strictQuery", true);
 
 // Подключаемся к БД
 mongoose
-  .connect(db)
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((res) => {
     console.log("Connect to DB");
   })
@@ -50,14 +52,27 @@ app.listen(PORT, () => {
   console.log(`listening port ${PORT}`);
 });
 
-// Получаем данные из БД и отдаем в UI по get
+// Получаем список участников торгов
 app.get("/traders", (req, res) => {
-  Bidders.find().then((result) => res.json(result));
+  TradeShema.find()
+    .then((result) => res.json(result))
+
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
-app.get("/limit_traders", (req, res) => {
-  // Bidders.find().then((result) => res.json(result));
+// Получаем заголовки меню комнаты торгов
+app.get("/traders_menu_room", (req, res) => {
+  TitlesMenuRoom.find()
+    .then((result) => res.json(result))
+
+    .catch((error) => {
+      console.log(error);
+    });
 });
+
+app.get("/limit_traders", (req, res) => {});
 
 // Имитация отсутвия юзеров
 app.get("/no_users", (req, res) => {

@@ -6,23 +6,27 @@ import SingleTimer from "./components/SingleTimer/SingleTimer";
 import TradeRoom from "./components/TradeUsers/TradeRoom";
 
 function App() {
-  const [users, setUsers] = React.useState([]);
+  const [traders, setTraders] = React.useState([]);
 
   //  Отсчет таймера, минуты
-  const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
+  //   const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
+  const timeCountdown = 4000;
 
   // Проверяем наличие пользователей
   React.useEffect(() => {
-    async function checkUsers() {
+    async function getTraders() {
       const response = await fetch(variables.URL + variables.TRADERS);
       if (response.ok) {
-        const users = await response.json();
-        setUsers(users);
+        const arrTraders = await response.json();
+
+        console.log(arrTraders);
+        setTraders(arrTraders);
       } else {
         console.log("Ошибка HTTP: " + response.status);
       }
     }
-    checkUsers();
+
+    getTraders();
   }, []);
 
   return (
@@ -32,9 +36,11 @@ function App() {
       </header>
 
       <article className={styles.trade_room}>
-        {/* <SingleTimer  timeCountdown={ time}/> */}
-
-        <TradeRoom users={users} timeCountdown={timeCountdown} />
+        {traders.length > 0 ? (
+          <TradeRoom traders={traders} timeCountdown={timeCountdown} />
+        ) : (
+          <SingleTimer timeCountdown={timeCountdown} />
+        )}
       </article>
     </main>
   );

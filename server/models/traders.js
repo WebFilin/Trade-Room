@@ -2,18 +2,16 @@
 // Импортируем провайдер к БД
 const mongoose = require("mongoose");
 
-// Получаем конструктр схем
 const Schema = mongoose.Schema;
 
-// Описываем схему сушьности постов
-const biddersShema = new Schema({
+const tradeShema = new Schema({
   name: {
     type: String,
     required: true,
   },
 
   price: {
-    type: String,
+    type: Array,
     required: true,
   },
 
@@ -38,7 +36,7 @@ const biddersShema = new Schema({
 });
 
 // Передаем схему в модель
-const Bidders = mongoose.model("Bidders", biddersShema);
+const TradeShema = mongoose.model("bidders", tradeShema);
 
 // Экспортируем модель
-module.exports = Bidders;
+module.exports = TradeShema;
