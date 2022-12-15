@@ -9,8 +9,7 @@ function App() {
   const [traders, setTraders] = React.useState([]);
 
   //  Отсчет таймера, минуты
-  //   const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
-  const timeCountdown = 4000;
+  const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
 
   // Проверяем наличие пользователей
   React.useEffect(() => {

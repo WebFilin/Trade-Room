@@ -109,7 +109,7 @@ function TradeUsers({ traders, timeCountdown }) {
             })}
           </tr>
 
-          <tr>
+          <tr className={styles.table_row__price}>
             <td>{dataMenu.price}</td>
             {arrTraders.map(({ price, isMove }) => {
               return (
