@@ -13,20 +13,20 @@ function App() {
 
   // Проверяем наличие пользователей
   React.useEffect(() => {
-    async function getTraders() {
-      const response = await fetch(variables.URL + variables.TRADERS);
-      if (response.ok) {
-        const arrTraders = await response.json();
-        setTraders(arrTraders);
-      } else {
-        console.log("Ошибка HTTP: " + response.status);
-      }
-    }
-
     getTraders();
   }, []);
 
-  //   Тестовые функции для разных режимов комнаты
+  async function getTraders() {
+    const response = await fetch(variables.URL + variables.TRADERS);
+    if (response.ok) {
+      const arrTraders = await response.json();
+      setTraders(arrTraders);
+    } else {
+      alert("Ошибка HTTP: " + response.status);
+    }
+  }
+
+  // Тестовые функции для разных режимов работы комнаты
   function noTraders() {
     setTraders([]);
   }
@@ -40,14 +40,8 @@ function App() {
     }
   }
 
-  async function allTraders(params) {
-    const response = await fetch(variables.URL + variables.TRADERS);
-    if (response.ok) {
-      const arrTraders = await response.json();
-      setTraders(arrTraders);
-    } else {
-      console.log("Ошибка HTTP: " + response.status);
-    }
+  function allTraders() {
+    getTraders();
   }
 
   return (
