@@ -43,7 +43,7 @@ function TradeUsers({ traders, timeCountdown }) {
       setStepBid((setTime) => (setTime = 0));
     }
 
-    //Включаем блок таймера в заданной ячейке
+    //Включаем блок таймера в заданной stepBid ячейке
     if (traders.length > 0) {
       traders.forEach((items, index) => {
         if (stepBid === index) {
