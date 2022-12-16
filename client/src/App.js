@@ -11,7 +11,7 @@ function App() {
   //  Отсчет таймера, минуты
   const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
 
-  // Проверяем наличие пользователей
+  // Получаем пользователей
   React.useEffect(() => {
     getTraders();
   }, []);
@@ -57,6 +57,7 @@ function App() {
           <SingleTimer timeCountdown={timeCountdown} />
         )}
       </article>
+      {/* Секция тестовых кнопок */}
       <section className={styles.wrapper_btns}>
         <p>Кнопки для тестирования приложения</p>
         <button className={styles.btn} onClick={allTraders}>

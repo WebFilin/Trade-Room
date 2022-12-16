@@ -25,14 +25,14 @@ const app = express();
 const PORT = 4000;
 
 //База данных
-const db =
+const MONGODB_URI =
   "mongodb+srv://Lotus:Pass321@cluster0.iyjr44f.mongodb.net/TradeRoom?retryWrites=true&w=majority";
 
 mongoose.set("strictQuery", true);
 
 // Подключаемся к БД
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((res) => {
     console.log("Connect to DB");
   })
