@@ -9,7 +9,7 @@ function SingleTimer({ timeCountdown }) {
   //   Меню команты торгов
   const [dataMenu, setDataMenu] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [trMove, setTrMove] = React.useState({});
+  const [trMove, setTrMove] = React.useState("");
 
   React.useEffect(() => {
     async function getTitlesMenuRoom() {
