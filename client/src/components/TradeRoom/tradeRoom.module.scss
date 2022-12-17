@@ -6,10 +6,13 @@ $pading-title: 10px;
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
 }
 
 .table {
-  margin-top: 50px;
+  //   margin-top: 50px;
   width: 100%;
   display: flex;
   justify-content: flex-start;
