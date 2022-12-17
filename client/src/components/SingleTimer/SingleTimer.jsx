@@ -18,10 +18,8 @@ function SingleTimer({ timeCountdown }) {
         const arrTraders = await response.json();
 
         setTrMove(arrTraders[0].move);
-        delete arrTraders[0]._id;
-        delete arrTraders[0].move;
 
-        const arrValues = Object.values(arrTraders[0]);
+        const arrValues = Object.values(...arrTraders).slice(2);
 
         setDataMenu(arrValues);
         setIsLoading(false);
