@@ -4,9 +4,11 @@ import variables from "./variables/variables";
 import Header from "./components/Header/Header";
 import SingleTimer from "./components/SingleTimer/SingleTimer";
 import TradeRoom from "./components/TradeUsers/TradeRoom";
+import Loader from "./components/Loader/Loader";
 
 function App() {
   const [traders, setTraders] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   //  Отсчет таймера, минуты
   const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
@@ -21,6 +23,7 @@ function App() {
     if (response.ok) {
       const arrTraders = await response.json();
       setTraders(arrTraders);
+      setIsLoading(false);
     } else {
       alert("Ошибка HTTP: " + response.status);
     }
@@ -51,7 +54,9 @@ function App() {
       </header>
 
       <article className={styles.trade_room}>
-        {traders.length > 0 ? (
+        {isLoading ? (
+          <Loader />
+        ) : traders.length > 0 ? (
           <TradeRoom traders={traders} timeCountdown={timeCountdown} />
         ) : (
           <SingleTimer timeCountdown={timeCountdown} />

@@ -11,9 +11,12 @@
 
 .trade_room {
   height: 70vh;
+  width: 100vw;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+
+  //   border: 2px solid red;
 }
 
 .wrapper_btns {

@@ -4,8 +4,8 @@ const variables = {
 
   //   Пути
   //   URL: "http://localhost:4000",
-
   URL: "https://trade-room-server.vercel.app",
+
   TRADERS: "/traders",
 
   //   Заголовки лота

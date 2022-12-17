@@ -3,10 +3,13 @@ import styles from "./singleTimer.module.scss";
 import Timer from "../Timer/Timer";
 import variables from "../../variables/variables";
 import shortid from "shortid";
+import Loader from "../Loader/Loader";
 
 function SingleTimer({ timeCountdown }) {
   //   Меню команты торгов
   const [dataMenu, setDataMenu] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [trMove, setTrMove] = React.useState({});
 
   React.useEffect(() => {
     async function getTitlesMenuRoom() {
@@ -14,11 +17,14 @@ function SingleTimer({ timeCountdown }) {
       if (response.ok) {
         const arrTraders = await response.json();
 
+        setTrMove(arrTraders[0].move);
         delete arrTraders[0]._id;
+        delete arrTraders[0].move;
 
         const arrValues = Object.values(arrTraders[0]);
 
         setDataMenu(arrValues);
+        setIsLoading(false);
       } else {
         console.log("Ошибка HTTP: " + response.status);
       }
@@ -29,21 +35,28 @@ function SingleTimer({ timeCountdown }) {
 
   return (
     <section className={styles.wrapper}>
-      <section className={styles.body}>
-        <Timer timeCountdown={timeCountdown} />
-      </section>
       <section>
-        <table className={styles.table}>
-          <tbody className={styles.table_body}>
-            {dataMenu.map((item) => {
-              return (
-                <tr key={shortid.generate()}>
-                  <td>{item}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <table className={styles.table}>
+            <tbody className={styles.table_body}>
+              <tr>
+                <td>{trMove}</td>
+                <td>
+                  <Timer timeCountdown={timeCountdown} />
+                </td>
+              </tr>
+              {dataMenu.map((item) => {
+                return (
+                  <tr key={shortid.generate()}>
+                    <td>{item}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </section>
     </section>
   );
