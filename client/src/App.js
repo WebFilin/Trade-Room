@@ -3,7 +3,7 @@ import styles from "./app.module.scss";
 import variables from "./variables/variables";
 import Header from "./components/Header/Header";
 import SingleTimer from "./components/SingleTimer/SingleTimer";
-import TradeRoom from "./components/TradeUsers/TradeRoom";
+import TradeRoom from "./components/TradeRoom/TradeRoom";
 import Loader from "./components/Loader/Loader";
 
 function App() {
