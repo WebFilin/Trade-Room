@@ -16,7 +16,7 @@ function Header() {
         const arrTraders = await response.json();
         setTitle(arrTraders);
       } else {
-        console.log("Ошибка HTTP: " + response.status);
+        console.log("Ошибка загрузки заголовка лота: " + response.status);
       }
     }
 

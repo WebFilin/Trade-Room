@@ -3,30 +3,12 @@ import styles from "./tradeRoom.module.scss";
 import shortid from "shortid";
 import Timer from "../Timer/Timer";
 import useInterval from "../useInterval/useInterval";
-import variables from "../../variables/variables";
 
-function TradeUsers({ traders, timeCountdown }) {
+function TradeRoom({ traders, timeCountdown, dataMenu }) {
   const [arrTraders, setArrTraders] = React.useState([]);
 
   //   Переход хода
   const [stepBid, setStepBid] = React.useState(1);
-
-  //   Меню команты торгов
-  const [dataMenu, setDataMenu] = React.useState({});
-
-  React.useEffect(() => {
-    async function getTitlesMenuRoom() {
-      const response = await fetch(variables.URL + variables.TITLES_MENU_ROOM);
-      if (response.ok) {
-        const arrTraders = await response.json();
-        setDataMenu(...arrTraders);
-      } else {
-        console.log("Ошибка HTTP: " + response.status);
-      }
-    }
-
-    getTitlesMenuRoom();
-  }, []);
 
   //   Отображаем таймер в первой ячейке при загрузке
   React.useEffect(() => {
@@ -63,8 +45,9 @@ function TradeUsers({ traders, timeCountdown }) {
     <section className={styles.wrapper}>
       <table className={styles.table}>
         <tbody className={styles.table_body}>
+          {/* Ход */}
           <tr className={styles.table_td_timer}>
-            <td>{dataMenu.move}</td>
+            <td>{dataMenu[0]}</td>
             {arrTraders.map(({ isMove }) => {
               return (
                 <td key={shortid.generate()}>
@@ -74,8 +57,9 @@ function TradeUsers({ traders, timeCountdown }) {
             })}
           </tr>
 
+          {/* Параметры и требования */}
           <tr className={styles.table_row__user_name}>
-            <td>{dataMenu.params}</td>
+            <td>{dataMenu[1]}</td>
             {arrTraders.map(({ name, isMove }) => {
               return (
                 <td
@@ -88,8 +72,9 @@ function TradeUsers({ traders, timeCountdown }) {
             })}
           </tr>
 
+          {/* Комплекс мероприятий */}
           <tr>
-            <td>{dataMenu.setOfMeasures}</td>
+            <td>{dataMenu[2]}</td>
             {arrTraders.map(({ qualityStandards, isMove }) => {
               return (
                 <td
@@ -102,8 +87,9 @@ function TradeUsers({ traders, timeCountdown }) {
             })}
           </tr>
 
+          {/* Срок изготовления */}
           <tr>
-            <td>{dataMenu.timeCreate}</td>
+            <td>{dataMenu[3]}</td>
             {arrTraders.map(({ productionTime, isMove }) => {
               return (
                 <td
@@ -116,8 +102,9 @@ function TradeUsers({ traders, timeCountdown }) {
             })}
           </tr>
 
+          {/* Гарантия */}
           <tr>
-            <td>{dataMenu.guarantee}</td>
+            <td>{dataMenu[4]}</td>
             {arrTraders.map(({ guarantee, isMove }) => {
               return (
                 <td
@@ -130,22 +117,24 @@ function TradeUsers({ traders, timeCountdown }) {
             })}
           </tr>
 
+          {/* Условия оплаты */}
           <tr>
-            <td>{dataMenu.payment}</td>
+            <td>{dataMenu[5]}</td>
             {arrTraders.map(({ termsPayment, isMove }) => {
               return (
                 <td
                   key={shortid.generate()}
                   className={isMove ? null : styles.disabled}
                 >
-                  {termsPayment}
+                  {termsPayment}%
                 </td>
               );
             })}
           </tr>
 
+          {/* Стоимость изготовления*/}
           <tr className={styles.table_row__price}>
-            <td>{dataMenu.price}</td>
+            <td>{dataMenu[6]}</td>
             {arrTraders.map(({ price, isMove }) => {
               return (
                 <td
@@ -161,8 +150,9 @@ function TradeUsers({ traders, timeCountdown }) {
             })}
           </tr>
 
+          {/* Действия */}
           <tr>
-            <td>{dataMenu.actions}</td>
+            <td>{dataMenu[7]}</td>
             {arrTraders.map(({ isMove }) => {
               return (
                 <td
@@ -180,4 +170,4 @@ function TradeUsers({ traders, timeCountdown }) {
   );
 }
 
-export default TradeUsers;
+export default TradeRoom;
