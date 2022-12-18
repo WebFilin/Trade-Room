@@ -8,7 +8,8 @@ import Loader from "./components/Loader/Loader";
 
 function App() {
   const [traders, setTraders] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoadTraders, setIsLoadTraders] = React.useState(true);
+  const [isLoadMenu, setIsLoadMenu] = React.useState(true);
   const [dataMenu, setDataMenu] = React.useState([]);
 
   //  Отсчет таймера, минуты
@@ -26,7 +27,7 @@ function App() {
       const arrTraders = await response.json();
 
       setTraders(arrTraders);
-      setIsLoading(false);
+      setIsLoadTraders(false);
     } else {
       alert("Ошибка загрузки компаний - участников: " + response.status);
     }
@@ -40,7 +41,7 @@ function App() {
       const arrValues = Object.values(...arrTraders).slice(1);
 
       setDataMenu(arrValues);
-      setIsLoading(false);
+      setIsLoadMenu(false);
     } else {
       alert("Ошибка загрузки параметров лота: " + response.status);
     }
@@ -71,7 +72,7 @@ function App() {
       </header>
 
       <article className={styles.trade_room}>
-        {isLoading ? (
+        {isLoadTraders && isLoadMenu ? (
           <Loader />
         ) : traders.length > 0 ? (
           <TradeRoom
