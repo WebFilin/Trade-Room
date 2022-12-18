@@ -13,6 +13,9 @@ const TitlesMenuRoom = require("./models/titlesMenuRoom");
 // Политика CORS - отключаем
 const cors = require("cors");
 
+// Работа с датой
+const date = require("date-and-time");
+
 const corsOptions = {
   origin: "*",
   credentials: true,
@@ -72,11 +75,15 @@ app.get("/traders_menu_room", (req, res) => {
     });
 });
 
-// Заголовок торговой комнаты - формирую на сервере для UI
+// Заголовок торговой комнаты, дату и текст формируем сразу не сервере.
+// Дата и время актуальные
 app.get("/traders_room_title", (req, res) => {
   const titleTrade = "Тестовые торги на аппарат ЛОТОС №2033564";
-  const dataTrade = "09.11.2020";
-  const timeTrade = "07:00";
+  const nowDate = new Date();
 
-  res.json(`${titleTrade} ${dataTrade} ${timeTrade}`);
+  try {
+    res.json(`${titleTrade} ${date.format(nowDate, "DD.MM.YYYY HH:mm")}`);
+  } catch (error) {
+    console.log(error);
+  }
 });
