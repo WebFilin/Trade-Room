@@ -15,19 +15,21 @@ function RoomWithTraders({ traders, timeCountdown, dataMenu }) {
     if (traders.length > 0) {
       traders[0].isMove = true;
     }
+
+    setArrTraders(traders);
   }, [traders]);
 
-  // Задаем интервал
+  // Задаем интервал перехода таймера
   useInterval(() => {
-    if (stepBid <= traders.length - 2) {
+    if (stepBid <= arrTraders.length - 2) {
       setStepBid((setTime) => setTime + 1);
     } else {
       setStepBid((setTime) => (setTime = 0));
     }
 
     //Включаем блок таймера в заданной stepBid ячейке
-    if (traders.length > 0) {
-      traders.forEach((items, index) => {
+    if (arrTraders.length > 0) {
+      arrTraders.forEach((items, index) => {
         if (stepBid === index) {
           items.isMove = true;
         } else {
@@ -36,10 +38,6 @@ function RoomWithTraders({ traders, timeCountdown, dataMenu }) {
       });
     }
   }, timeCountdown);
-
-  React.useEffect(() => {
-    setArrTraders(traders);
-  }, [traders]);
 
   return (
     <section className={styles.wrapper}>

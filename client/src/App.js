@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./app.module.scss";
-import variables from "./variables/variables";
+import server from "./constants/server";
 import Header from "./components/Header/Header";
 import Loader from "./components/Loader/Loader";
 import TradersRoom from "./components/TradersRoom/TradersRoom";
@@ -18,11 +18,11 @@ function App() {
   }, []);
 
   async function getTraders() {
-    const response = await fetch(variables.URL + variables.TRADERS);
+    const response = await fetch(server.URL + server.TRADERS);
     if (response.ok) {
-      const arrTraders = await response.json();
+      const allTraders = await response.json();
 
-      setTraders(arrTraders);
+      setTraders(allTraders);
       setIsLoadTraders(false);
     } else {
       alert("Ошибка загрузки компаний - участников: " + response.status);
@@ -30,11 +30,11 @@ function App() {
   }
 
   async function getTitlesMenuRoom() {
-    const response = await fetch(variables.URL + variables.TITLES_MENU_ROOM);
+    const response = await fetch(server.URL + server.TITLES_MENU_ROOM);
     if (response.ok) {
-      const arrTraders = await response.json();
+      const arrValuesTitles = await response.json();
 
-      const arrValues = Object.values(...arrTraders).slice(1);
+      const arrValues = Object.values(...arrValuesTitles).slice(1);
 
       setDataMenu(arrValues);
       setIsLoadMenu(false);

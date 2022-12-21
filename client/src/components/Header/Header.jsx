@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./header.module.scss";
-import variables from "../../variables/variables";
+import server from "../../constants/server";
 
 function Header() {
   const [title, setTitle] = React.useState(null);
@@ -11,7 +11,7 @@ function Header() {
   // Проверяем наличие пользователей
   React.useEffect(() => {
     async function getTraders() {
-      const response = await fetch(variables.URL + variables.ROOM_TITLE);
+      const response = await fetch(server.URL + server.ROOM_TITLE);
       if (response.ok) {
         const arrTraders = await response.json();
         setTitle(arrTraders);

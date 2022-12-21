@@ -1,9 +1,9 @@
 import React from "react";
-import variables from "../../variables/variables";
+import variables from "../../constants/constants";
 import NoTraders from "../NoTraders/NoTraders";
 import RoomWithTraders from "../RoomWithTraders/RoomWithTraders";
 
-function Loader({ traders, dataMenu }) {
+function TradersRoom({ traders, dataMenu }) {
   //  Отсчет таймера, минуты
   const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
 
@@ -22,4 +22,4 @@ function Loader({ traders, dataMenu }) {
   );
 }
 
-export default Loader;
+export default TradersRoom;

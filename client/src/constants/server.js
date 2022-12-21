@@ -1,8 +1,4 @@
-const variables = {
-  // Отсчет таймера, минуты
-  TIME_LIMIT_MIN: 2,
-
-  //   Пути
+const server = {
   //   URL: "http://localhost:4000",
   URL: "https://trade-room-server.vercel.app",
 
@@ -18,4 +14,4 @@ const variables = {
   LIMIT_TRADE: "/limit_traders",
 };
 
-export default variables;
+export default server;
