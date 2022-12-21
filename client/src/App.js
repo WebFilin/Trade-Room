@@ -2,18 +2,14 @@ import React from "react";
 import styles from "./app.module.scss";
 import variables from "./variables/variables";
 import Header from "./components/Header/Header";
-import SingleTimer from "./components/NoTraders/NoTraders";
-import TradeRoom from "./components/TradeRoom/TradeRoom";
 import Loader from "./components/Loader/Loader";
+import TradersRoom from "./components/TradersRoom/TradersRoom";
 
 function App() {
   const [traders, setTraders] = React.useState([]);
+  const [dataMenu, setDataMenu] = React.useState([]);
   const [isLoadTraders, setIsLoadTraders] = React.useState(true);
   const [isLoadMenu, setIsLoadMenu] = React.useState(true);
-  const [dataMenu, setDataMenu] = React.useState([]);
-
-  //  Отсчет таймера, минуты
-  const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
 
   // Получаем пользователей и пункты меню комнаты
   React.useEffect(() => {
@@ -74,14 +70,8 @@ function App() {
       <article className={styles.trade_room}>
         {isLoadTraders && isLoadMenu ? (
           <Loader />
-        ) : traders.length > 0 ? (
-          <TradeRoom
-            traders={traders}
-            timeCountdown={timeCountdown}
-            dataMenu={dataMenu}
-          />
         ) : (
-          <SingleTimer timeCountdown={timeCountdown} dataMenu={dataMenu} />
+          <TradersRoom traders={traders} dataMenu={dataMenu} />
         )}
       </article>
       {/* Секция тестовых кнопок */}

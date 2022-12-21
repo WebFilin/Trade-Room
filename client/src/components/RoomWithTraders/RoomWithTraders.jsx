@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./tradeRoom.module.scss";
+import styles from "./roomWithTraders.module.scss";
 import shortid from "shortid";
 import Timer from "../Timer/Timer";
 import useInterval from "../useInterval/useInterval";
 
-function TradeRoom({ traders, timeCountdown, dataMenu }) {
+function RoomWithTraders({ traders, timeCountdown, dataMenu }) {
   const [arrTraders, setArrTraders] = React.useState([]);
 
   //   Переход хода
@@ -170,4 +170,4 @@ function TradeRoom({ traders, timeCountdown, dataMenu }) {
   );
 }
 
-export default TradeRoom;
+export default RoomWithTraders;

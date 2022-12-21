@@ -3,7 +3,7 @@ import styles from "./noTraders.module.scss";
 import Timer from "../Timer/Timer";
 import shortid from "shortid";
 
-function SingleTimer({ timeCountdown, dataMenu }) {
+function NoTraders({ timeCountdown, dataMenu }) {
   return (
     <section className={styles.wrapper}>
       <section>
@@ -30,4 +30,4 @@ function SingleTimer({ timeCountdown, dataMenu }) {
   );
 }
 
-export default SingleTimer;
+export default NoTraders;
