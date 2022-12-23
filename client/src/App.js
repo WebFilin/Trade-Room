@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Loader from "./components/Loader/Loader";
 import TradersRoom from "./components/TradersRoom/TradersRoom";
 import ManyTraders from "./components/ManyTraders/ManyTraders";
+import Button from "./components/Button/Button";
 
 function App() {
   const [traders, setTraders] = React.useState([]);
@@ -74,14 +75,9 @@ function App() {
       </article>
       {/*Кнопки для тестирования приложения*/}
       <section className={styles.wrapper_btns}>
-        <p>Тестирование комнаты торгов</p>
-        <button className={styles.btn} onClick={allTraders}>
-          Все трейдеры
-        </button>
-
-        <button className={styles.btn} onClick={noTraders}>
-          Нет трейдеров
-        </button>
+        <p>Тестирование режимов работы комнаты</p>
+        <Button title="Все трейдеры" callback={allTraders} />
+        <Button title="Нет трейдеров" callback={noTraders} />
         <ManyTraders limitTraders={getLimitTraders} />
       </section>
     </main>

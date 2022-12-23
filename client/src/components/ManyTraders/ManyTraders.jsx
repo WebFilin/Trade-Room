@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./manyTraders.module.scss";
 import server from "../../constants/server";
 import constans from "../../constants/constants";
+import Button from "../Button/Button";
 
 function ManyTraders({ limitTraders }) {
   const [limit, setLimit] = React.useState("");
@@ -23,7 +24,7 @@ function ManyTraders({ limitTraders }) {
 
     if (limit <= constans.TRADERS_LIMIT) {
       const response = await fetch(
-        server.URL + server.LIMIT_TRADERS_URL + server.LIMIT + `${limit}`
+        server.URL + server.LIMIT_TRADERS_URL + server.QUERY_LIMIT + `${limit}`
       );
 
       if (response.ok) {
@@ -45,20 +46,21 @@ function ManyTraders({ limitTraders }) {
   }
 
   return (
-    <form className={styles.wrapper_some_traders}>
-      <input
-        ref={ref}
-        className={styles.some_traders}
-        type="number"
-        onChange={handllerInput}
-      ></input>
-      <button type="submit" className={styles.btn} onClick={someTraders}>
-        Несколько трейдеров
-      </button>
-      <p>
+    <div className={styles.wrapper}>
+      <form className={styles.body}>
+        <input
+          ref={ref}
+          className={styles.input}
+          type="number"
+          onChange={handllerInput}
+        ></input>
+
+        <Button title=" Несколько трейдеров" callback={someTraders} />
+      </form>
+      <span className={styles.worning}>
         {limit > constans.TRADERS_LIMIT ? "Превышено число трейдеров" : null}
-      </p>
-    </form>
+      </span>
+    </div>
   );
 }
 

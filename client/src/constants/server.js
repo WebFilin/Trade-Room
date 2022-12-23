@@ -12,7 +12,7 @@ const server = Object.freeze({
 
   // Количество трейдеров в лоте
   LIMIT_TRADERS_URL: "/limit_traders",
-  LIMIT: "?limit="
+  QUERY_LIMIT: "?limit=",
 });
 
 export default server;
