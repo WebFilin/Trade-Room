@@ -49,7 +49,6 @@ function ManyTraders({ limitTraders }) {
   return (
     <div className={styles.wrapper}>
       <span className={styles.title}>
-        {" "}
         Введите число от 0 до {constans.TRADERS_LIMIT}
       </span>
       <form className={styles.body}>
@@ -66,7 +65,9 @@ function ManyTraders({ limitTraders }) {
           isDisabled={isDisabled}
         />
       </form>
-      {limit > constans.TRADERS_LIMIT ? constans.WARNING : null}
+      <p className={styles.warning}>
+        {limit > constans.TRADERS_LIMIT ? constans.WARNING : null}
+      </p>
     </div>
   );
 }

@@ -23,6 +23,8 @@ function RoomWithTraders({ traders, timeCountdown, dataMenu }) {
   useInterval(() => {
     if (stepBid <= arrTraders.length - 2) {
       setStepBid((setTime) => setTime + 1);
+    } else if (traders.length === 1) {
+      setStepBid(0);
     } else {
       setStepBid((setTime) => (setTime = 0));
     }
@@ -37,6 +39,10 @@ function RoomWithTraders({ traders, timeCountdown, dataMenu }) {
         }
       });
     }
+
+    //  if (traders.length === 1) {
+    //    setStepBid(0);
+    //  }
   }, timeCountdown);
 
   return (
