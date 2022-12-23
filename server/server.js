@@ -2,7 +2,7 @@ const express = require("express");
 
 const morgan = require("morgan");
 
-const routes = require("./config/routes")
+const routes = require("./config/routes");
 const config = require("./config/app");
 
 // Mongoose - провайдер для базы данных mongoDB
@@ -28,7 +28,7 @@ const corsOptions = {
 // Сервер
 const app = express();
 
-// const PORT = 4000;
+const PORT = config.PORT;
 
 mongoose.set("strictQuery", true);
 
@@ -53,8 +53,8 @@ app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
 
-app.listen(config.PORT, () => {
-  console.log(`listening port ${config.PORT}`);
+app.listen(PORT, () => {
+  console.log(`listening port ${PORT}`);
 });
 
 // Получаем список участников торгов
