@@ -2,6 +2,9 @@ const express = require("express");
 
 const morgan = require("morgan");
 
+const routes = require("./config/routes")
+const config = require("./config/app");
+
 // Mongoose - провайдер для базы данных mongoDB
 const mongoose = require("mongoose");
 
@@ -25,17 +28,16 @@ const corsOptions = {
 // Сервер
 const app = express();
 
-const PORT = 4000;
-
-//База данных
-const MONGODB_URI =
-  "mongodb+srv://Lotus:Pass321@cluster0.iyjr44f.mongodb.net/TradeRoom?retryWrites=true&w=majority";
+// const PORT = 4000;
 
 mongoose.set("strictQuery", true);
 
 // Подключаемся к БД
 mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(config.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then((res) => {
     console.log("Connect to DB");
   })
@@ -51,12 +53,12 @@ app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
 
-app.listen(PORT, () => {
-  console.log(`listening port ${PORT}`);
+app.listen(config.PORT, () => {
+  console.log(`listening port ${config.PORT}`);
 });
 
 // Получаем список участников торгов
-app.get("/traders", (req, res) => {
+app.get(routes.TRADERS, (req, res) => {
   TradeShema.find()
     .then((result) => res.json(result))
 
@@ -66,9 +68,9 @@ app.get("/traders", (req, res) => {
 });
 
 // Получаем список участников торгов
-app.get("/limit_traders", (req, res) => {
+app.get(routes.LIMIT_TRADERS, (req, res) => {
   const limit = req.query.limit;
-console.log( limit)
+
   TradeShema.find()
     .then((result) => res.json(result.slice(0, limit)))
 
@@ -78,7 +80,7 @@ console.log( limit)
 });
 
 // Получаем заголовки меню комнаты торгов
-app.get("/traders_menu_room", (req, res) => {
+app.get(routes.TRADERS_MENU_ROOM, (req, res) => {
   TitlesMenuRoom.find()
     .then((result) => res.json(result))
 
@@ -89,7 +91,7 @@ app.get("/traders_menu_room", (req, res) => {
 
 // Заголовок торговой комнаты, дату и текст формируем сразу не сервере.
 // Дата и время актуальные
-app.get("/traders_room_title", (req, res) => {
+app.get(routes.TRADERS_ROOM_TITLE, (req, res) => {
   const titleTrade = "Тестовые торги на аппарат ЛОТОС №2033564";
   const nowDate = new Date();
 
