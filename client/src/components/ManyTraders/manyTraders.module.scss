@@ -1,9 +1,18 @@
 .wrapper {
+  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .title {
+    // position: absolute;
+    display: inline-block;
+    left: 0;
+    color: red;
+    border: 2px solid red;
+  }
 }
 
 .body {
@@ -16,7 +25,6 @@
   margin: 0px 20px 10px 0px;
 
   display: inline-block;
-  box-sizing: border-box;
   outline: none;
 
   height: 36px;
@@ -33,14 +41,14 @@
   transition: box-shadow 0.2s;
 
   &:hover {
-   transition: all 0.2s;
-   box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
- }
+    transition: all 0.2s;
+    box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+  }
 
- &:focus-visible {
-   border: 1px solid #4c51f9;
-   outline: none;
- }
+  &:focus-visible {
+    border: 1px solid #4c51f9;
+    outline: none;
+  }
 }
 
 .worning {

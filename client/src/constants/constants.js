@@ -4,6 +4,8 @@ const variables = Object.freeze({
 
   //   Количество всех трейдеров в комнате
   TRADERS_LIMIT: 5,
+
+  WARNING: "Некоректное число пользователей"
 });
 
 export default variables;

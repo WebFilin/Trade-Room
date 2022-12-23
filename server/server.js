@@ -68,7 +68,7 @@ app.get("/traders", (req, res) => {
 // Получаем список участников торгов
 app.get("/limit_traders", (req, res) => {
   const limit = req.query.limit;
-
+console.log( limit)
   TradeShema.find()
     .then((result) => res.json(result.slice(0, limit)))
 

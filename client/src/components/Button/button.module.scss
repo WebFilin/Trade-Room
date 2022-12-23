@@ -34,11 +34,12 @@
   &:active {
     background-color: #808080;
   }
+}
 
-  &:disabled {
-    background-color: #eee;
-    border-color: #eee;
-    color: #444;
-    cursor: not-allowed;
-  }
+.disabled {
+  @extend .btn;
+  background-color: rgb(188, 186, 186);
+  border-color: rgb(188, 186, 186);
+  color: rgb(223, 219, 219);
+  cursor: not-allowed;
 }

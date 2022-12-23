@@ -5,61 +5,68 @@ import constans from "../../constants/constants";
 import Button from "../Button/Button";
 
 function ManyTraders({ limitTraders }) {
-  const [limit, setLimit] = React.useState("");
-  const ref = React.useRef();
+  const [limit, setLimit] = React.useState(constans.TRADERS_LIMIT);
+  const [isDisabled, setIsDisabled] = React.useState(false);
+  const inputRef = React.useRef();
+
+  React.useEffect(() => {
+    if (limit > constans.TRADERS_LIMIT) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+  }, [limit]);
 
   function handllerInput(ev) {
     ev.preventDefault();
 
-    if (limit <= constans.TRADERS_LIMIT) {
-      const limit = Number(ev.target.value);
-      setLimit(limit);
-    } else {
-      clearInput();
-    }
+    const limit = Number(ev.target.value);
+    setLimit(limit);
   }
 
   async function someTraders(ev) {
     ev.preventDefault();
 
-    if (limit <= constans.TRADERS_LIMIT) {
-      const response = await fetch(
-        server.URL + server.LIMIT_TRADERS_URL + server.QUERY_LIMIT + `${limit}`
-      );
+    const response = await fetch(
+      server.URL + server.LIMIT_TRADERS_URL + server.QUERY_LIMIT + `${limit}`
+    );
 
-      if (response.ok) {
-        const allTraders = await response.json();
-        limitTraders(allTraders);
-      } else {
-        alert("Ошибка загрузки компаний - участников: " + response.status);
-      }
-
-      clearInput();
+    if (response.ok) {
+      const allTraders = await response.json();
+      limitTraders(allTraders);
     } else {
-      return;
+      alert("Ошибка загрузки компаний - участников: " + response.status);
     }
+
+    clearInput();
   }
 
   function clearInput() {
     setLimit("");
-    ref.current.value = "";
+    inputRef.current.value = "";
   }
 
   return (
     <div className={styles.wrapper}>
+      <span className={styles.title}>
+        {" "}
+        Введите число от 0 до {constans.TRADERS_LIMIT}
+      </span>
       <form className={styles.body}>
         <input
-          ref={ref}
+          ref={inputRef}
           className={styles.input}
           type="number"
           onChange={handllerInput}
         ></input>
 
-        <Button title=" Несколько трейдеров" callback={someTraders} />
+        <Button
+          title="Несколько трейдеров"
+          callback={someTraders}
+          isDisabled={isDisabled}
+        />
       </form>
-      <span className={styles.worning}>
-        {limit > constans.TRADERS_LIMIT ? "Превышено число трейдеров" : null}
-      </span>
+      {limit > constans.TRADERS_LIMIT ? constans.WARNING : null}
     </div>
   );
 }

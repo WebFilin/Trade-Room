@@ -76,8 +76,8 @@ function App() {
       {/*Кнопки для тестирования приложения*/}
       <section className={styles.wrapper_btns}>
         <p>Тестирование режимов работы комнаты</p>
-        <Button title="Все трейдеры" callback={allTraders} />
-        <Button title="Нет трейдеров" callback={noTraders} />
+        <Button title="Все трейдеры" callback={allTraders} isDisabled={false} />
+        <Button title="Нет трейдеров" callback={noTraders} isDisabled={false} />
         <ManyTraders limitTraders={getLimitTraders} />
       </section>
     </main>
