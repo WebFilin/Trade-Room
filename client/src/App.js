@@ -4,6 +4,7 @@ import server from "./constants/server";
 import Header from "./components/Header/Header";
 import Loader from "./components/Loader/Loader";
 import TradersRoom from "./components/TradersRoom/TradersRoom";
+import ManyTraders from "./components/ManyTraders/ManyTraders";
 
 function App() {
   const [traders, setTraders] = React.useState([]);
@@ -43,18 +44,15 @@ function App() {
     }
   }
 
+  // Получаем заданное количество трейдеров
+  function getLimitTraders(sumTraders) {
+    setTraders(sumTraders);
+    setIsLoadTraders(false);
+  }
+
   // Тестовые функции для разных режимов работы комнаты
   function noTraders() {
     setTraders([]);
-  }
-
-  function threeTraders() {
-    if (traders.length > 0) {
-      const arrThreeTraders = traders.slice(2);
-      setTraders(arrThreeTraders);
-    } else {
-      alert("Нет трейдеров на торгах");
-    }
   }
 
   function allTraders() {
@@ -74,7 +72,7 @@ function App() {
           <TradersRoom traders={traders} dataMenu={dataMenu} />
         )}
       </article>
-      {/* Секция тестовых кнопок */}
+      {/*Кнопки для тестирования приложения*/}
       <section className={styles.wrapper_btns}>
         <p>Тестирование комнаты торгов</p>
         <button className={styles.btn} onClick={allTraders}>
@@ -84,9 +82,7 @@ function App() {
         <button className={styles.btn} onClick={noTraders}>
           Нет трейдеров
         </button>
-        <button className={styles.btn} onClick={threeTraders}>
-          Три трейдера
-        </button>
+        <ManyTraders limitTraders={getLimitTraders} />
       </section>
     </main>
   );

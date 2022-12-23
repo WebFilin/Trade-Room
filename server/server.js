@@ -65,6 +65,18 @@ app.get("/traders", (req, res) => {
     });
 });
 
+// Получаем список участников торгов
+app.get("/limit_traders", (req, res) => {
+  const limit = req.query.limit;
+
+  TradeShema.find()
+    .then((result) => res.json(result.slice(0, limit)))
+
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 // Получаем заголовки меню комнаты торгов
 app.get("/traders_menu_room", (req, res) => {
   TitlesMenuRoom.find()
