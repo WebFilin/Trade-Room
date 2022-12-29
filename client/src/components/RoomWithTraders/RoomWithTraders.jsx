@@ -32,7 +32,9 @@ function RoomWithTraders({ traders, timeCountdown, dataMenu }) {
     // Включаем блок таймера в заданной stepBid ячейке
     if (arrTraders.length > 0) {
       arrTraders.forEach((items, index) => {
-        if (stepBid === index) {
+        if (traders.length === 1) {
+          setStepBid(1);
+        } else if (stepBid === index) {
           items.isMove = true;
         } else {
           items.isMove = false;
@@ -40,10 +42,6 @@ function RoomWithTraders({ traders, timeCountdown, dataMenu }) {
       });
     }
 
-// Только один трейдер в комнате
-     if (traders.length === 1) {
-       setStepBid(0);
-     }
   }, timeCountdown);
 
   return (
