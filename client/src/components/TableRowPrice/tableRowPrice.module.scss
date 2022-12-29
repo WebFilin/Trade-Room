@@ -1,0 +1,17 @@
+.disabled {
+  color: gray;
+}
+
+.active {
+  p:first-child {
+    color: red;
+  }
+
+  p:nth-child(2) {
+    color: rgb(18, 197, 18);
+  }
+
+  p:last-child {
+    color: blue;
+  }
+}

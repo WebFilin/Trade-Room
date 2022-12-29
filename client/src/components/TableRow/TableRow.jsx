@@ -1,11 +1,9 @@
 import React from "react";
 import styles from "./tableRow.module.scss";
 import shortid from "shortid";
-function TableRow({ arrTraders, arrMenu, rowTitle, tdValue }) {
-  //   console.log(arrTraders[0].isMove);
-
+function TableRow({ arrTraders, rowTitle, tdValue, symbol }) {
   return (
-    <tr className={styles.table_row__user_name}>
+    <tr className={styles.table_row}>
       <td>{rowTitle}</td>
       {arrTraders.map((items) => {
         return (
@@ -13,7 +11,7 @@ function TableRow({ arrTraders, arrMenu, rowTitle, tdValue }) {
             key={shortid.generate()}
             className={items.isMove ? styles.active : styles.disabled}
           >
-            {items[tdValue]}
+            {items[tdValue] ? items[tdValue] + symbol : "-"}
           </td>
         );
       })}

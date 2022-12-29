@@ -1,0 +1,12 @@
+.timer {
+  text-align: center;
+  color: blue;
+
+  td {
+    :first-child {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

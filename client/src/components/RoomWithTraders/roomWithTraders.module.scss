@@ -28,52 +28,7 @@ $pading-title: 10px;
     text-align: center;
   }
 
-  .table_td_timer {
-    text-align: center;
-    color: blue;
-    line-height: 60px;
-
-    td {
-      :first-child {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-
   tr:nth-child(odd) {
     background-color: #f1f1f1;
-  }
-}
-
-.table_row__user_name {
-  text-align: center;
-  color: blue;
-}
-
-.table_row__price {
-  p:first-child {
-    color: red;
-  }
-
-  p:nth-child(2) {
-    color: rgb(18, 197, 18);
-  }
-
-  p:last-child {
-    color: blue;
-  }
-}
-
-.disabled {
-  color: gray;
-}
-
-.table_row__price {
-  .disabled {
-    p {
-      color: gray;
-    }
   }
 }

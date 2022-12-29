@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./roomWithTraders.module.scss";
-import shortid from "shortid";
-import Timer from "../Timer/Timer";
 import useInterval from "../useInterval/useInterval";
+import TableRow from "../TableRow/TableRow";
+import TableRowTimer from "../TableRowTimer/TableRowTimer";
+import TableRowPrice from "../TableRowPrice/TableRowPrice";
 
 function RoomWithTraders({ traders, timeCountdown, dataMenu }) {
   const [arrTraders, setArrTraders] = React.useState([]);
@@ -46,124 +47,72 @@ function RoomWithTraders({ traders, timeCountdown, dataMenu }) {
       <table className={styles.table}>
         <tbody className={styles.table_body}>
           {/* Ход */}
-          <tr className={styles.table_td_timer}>
-            <td>{dataMenu[0]}</td>
-            {arrTraders.map(({ isMove }) => {
-              return (
-                <td key={shortid.generate()}>
-                  {isMove ? <Timer timeCountdown={timeCountdown} /> : null}
-                </td>
-              );
-            })}
-          </tr>
+          <TableRowTimer
+            arrTraders={arrTraders}
+            timeCountdown={timeCountdown}
+            rowTitle={dataMenu[0]}
+          />
 
           {/* Параметры и требования */}
-          <tr className={styles.table_row__user_name}>
-            <td>{dataMenu[1]}</td>
-            {arrTraders.map(({ name, isMove }) => {
-              return (
-                <td
-                  key={shortid.generate()}
-                  className={isMove ? null : styles.disabled}
-                >
-                  {name}
-                </td>
-              );
-            })}
-          </tr>
+          <TableRow
+            arrTraders={arrTraders}
+            arrMenu={dataMenu}
+            rowTitle={dataMenu[1]}
+            tdValue={"name"}
+            symbol={""}
+          />
 
           {/* Комплекс мероприятий */}
-          <tr>
-            <td>{dataMenu[2]}</td>
-            {arrTraders.map(({ qualityStandards, isMove }) => {
-              return (
-                <td
-                  key={shortid.generate()}
-                  className={isMove ? null : styles.disabled}
-                >
-                  {qualityStandards}
-                </td>
-              );
-            })}
-          </tr>
+          <TableRow
+            arrTraders={arrTraders}
+            arrMenu={dataMenu}
+            rowTitle={dataMenu[2]}
+            tdValue={"qualityStandards"}
+            symbol={""}
+          />
 
           {/* Срок изготовления */}
-          <tr>
-            <td>{dataMenu[3]}</td>
-            {arrTraders.map(({ productionTime, isMove }) => {
-              return (
-                <td
-                  key={shortid.generate()}
-                  className={isMove ? null : styles.disabled}
-                >
-                  {productionTime}
-                </td>
-              );
-            })}
-          </tr>
+          <TableRow
+            arrTraders={arrTraders}
+            arrMenu={dataMenu}
+            rowTitle={dataMenu[3]}
+            tdValue={"productionTime"}
+            symbol={""}
+          />
 
           {/* Гарантия */}
-          <tr>
-            <td>{dataMenu[4]}</td>
-            {arrTraders.map(({ guarantee, isMove }) => {
-              return (
-                <td
-                  key={shortid.generate()}
-                  className={isMove ? null : styles.disabled}
-                >
-                  {guarantee}
-                </td>
-              );
-            })}
-          </tr>
+          <TableRow
+            arrTraders={arrTraders}
+            arrMenu={dataMenu}
+            rowTitle={dataMenu[4]}
+            tdValue={"guarantee"}
+            symbol={" мес"}
+          />
 
           {/* Условия оплаты */}
-          <tr>
-            <td>{dataMenu[5]}</td>
-            {arrTraders.map(({ termsPayment, isMove }) => {
-              return (
-                <td
-                  key={shortid.generate()}
-                  className={isMove ? null : styles.disabled}
-                >
-                  {termsPayment}%
-                </td>
-              );
-            })}
-          </tr>
+          <TableRow
+            arrTraders={arrTraders}
+            arrMenu={dataMenu}
+            rowTitle={dataMenu[5]}
+            tdValue={"termsPayment"}
+            symbol={"%"}
+          />
 
           {/* Стоимость изготовления*/}
-          <tr className={styles.table_row__price}>
-            <td>{dataMenu[6]}</td>
-            {arrTraders.map(({ price, isMove }) => {
-              return (
-                <td
-                  key={shortid.generate()}
-                  className={isMove ? null : styles.disabled}
-                >
-                  {price &&
-                    price.map((items) => {
-                      return <p key={shortid.generate()}>{items}</p>;
-                    })}
-                </td>
-              );
-            })}
-          </tr>
+          <TableRowPrice
+            arrTraders={arrTraders}
+            rowTitle={dataMenu[6]}
+            symbol={""}
+          />
 
           {/* Действия */}
-          <tr>
-            <td>{dataMenu[7]}</td>
-            {arrTraders.map(({ isMove }) => {
-              return (
-                <td
-                  key={shortid.generate()}
-                  className={isMove ? null : styles.disabled}
-                >
-                  -
-                </td>
-              );
-            })}
-          </tr>
+          <TableRow
+            arrTraders={arrTraders}
+            arrMenu={dataMenu}
+            rowTitle={dataMenu[7]}
+            tdValue={""}
+            symbol={""}
+          />
         </tbody>
       </table>
     </section>
