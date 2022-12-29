@@ -5,8 +5,8 @@ import RoomWithTraders from "../RoomWithTraders/RoomWithTraders";
 
 function TradersRoom({ traders, dataMenu }) {
   //  Отсчет таймера, минуты
-  const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
-
+  //   const timeCountdown = variables.TIME_LIMIT_MIN * 60 * 1000;
+  const timeCountdown = 3000;
   return (
     <>
       {traders.length > 0 ? (
