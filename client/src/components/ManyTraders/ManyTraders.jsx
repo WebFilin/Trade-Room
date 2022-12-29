@@ -5,7 +5,7 @@ import constans from "../../constants/constants";
 import Button from "../Button/Button";
 
 function ManyTraders({ limitTraders }) {
-  const [limit, setLimit] = React.useState(constans.TRADERS_LIMIT);
+  const [limit, setLimit] = React.useState(0);
   const [isDisabled, setIsDisabled] = React.useState(false);
   const inputRef = React.useRef();
 
@@ -21,12 +21,13 @@ function ManyTraders({ limitTraders }) {
     ev.preventDefault();
 
     const limit = Number(ev.target.value);
+
     setLimit(limit);
   }
 
   async function someTraders(ev) {
     ev.preventDefault();
-
+    console.log(limit);
     const response = await fetch(
       server.URL + server.LIMIT_TRADERS_URL + server.QUERY_LIMIT + `${limit}`
     );

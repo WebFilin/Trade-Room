@@ -15,33 +15,38 @@ function App() {
 
   // Получаем пользователей и пункты меню комнаты
   React.useEffect(() => {
+    async function getTitlesMenuRoom() {
+      const arrValuesTitles = await feachAPI(
+        server.TITLES_MENU_ROOM,
+        "Ошибка загрузки параметров лота:"
+      );
+
+      const arrValues = Object.values(...arrValuesTitles).slice(1);
+      setDataMenu(arrValues);
+      setIsLoadMenu(false);
+    }
+
     getTitlesMenuRoom();
     getTraders();
   }, []);
 
   async function getTraders() {
-    const response = await fetch(server.URL + server.TRADERS);
-    if (response.ok) {
-      const allTraders = await response.json();
+    const allTraders = await feachAPI(
+      server.TRADERS,
+      "Ошибка загрузки компаний-участников:"
+    );
 
-      setTraders(allTraders);
-      setIsLoadTraders(false);
-    } else {
-      alert("Ошибка загрузки компаний - участников: " + response.status);
-    }
+    setTraders(allTraders);
+    setIsLoadTraders(false);
   }
 
-  async function getTitlesMenuRoom() {
-    const response = await fetch(server.URL + server.TITLES_MENU_ROOM);
+  async function feachAPI(query, error) {
+    const response = await fetch(server.URL + query);
+
     if (response.ok) {
-      const arrValuesTitles = await response.json();
-
-      const arrValues = Object.values(...arrValuesTitles).slice(1);
-
-      setDataMenu(arrValues);
-      setIsLoadMenu(false);
+      return await response.json();
     } else {
-      alert("Ошибка загрузки параметров лота: " + response.status);
+      alert(`${error} ` + response.status);
     }
   }
 
