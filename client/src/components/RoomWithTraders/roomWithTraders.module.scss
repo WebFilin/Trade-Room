@@ -31,4 +31,9 @@ $pading-title: 10px;
   tr:nth-child(odd) {
     background-color: #f1f1f1;
   }
+
+  tr:nth-child(2) {
+    color: blue;
+    text-align: center;
+  }
 }
