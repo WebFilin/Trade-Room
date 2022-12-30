@@ -6,6 +6,7 @@ import Loader from "./components/Loader/Loader";
 import TradersRoom from "./components/TradersRoom/TradersRoom";
 import ManyTraders from "./components/ManyTraders/ManyTraders";
 import Button from "./components/Button/Button";
+import { API } from "./components/API/API";
 
 function App() {
   const [traders, setTraders] = React.useState([]);
@@ -16,7 +17,7 @@ function App() {
   // Получаем пользователей и пункты меню комнаты
   React.useEffect(() => {
     async function getTitlesMenuRoom() {
-      const arrValuesTitles = await feachAPI(
+      const arrValuesTitles = await API(
         server.TITLES_MENU_ROOM,
         "Ошибка загрузки параметров лота:"
       );
@@ -31,23 +32,13 @@ function App() {
   }, []);
 
   async function getTraders() {
-    const allTraders = await feachAPI(
+    const allTraders = await API(
       server.TRADERS,
       "Ошибка загрузки компаний-участников:"
     );
 
     setTraders(allTraders);
     setIsLoadTraders(false);
-  }
-
-  async function feachAPI(query, error) {
-    const response = await fetch(server.URL + query);
-
-    if (response.ok) {
-      return await response.json();
-    } else {
-      alert(`${error} ` + response.status);
-    }
   }
 
   // Получаем заданное количество трейдеров
