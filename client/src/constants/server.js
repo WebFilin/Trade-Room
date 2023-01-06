@@ -1,6 +1,6 @@
 const server = Object.freeze({
   //   URL: "http://localhost:4000",
-  URL: "https://trade-room-mt2w-hu9h8r5pm-webfilin.vercel.app",
+  URL: "https://trade-room-ozda-bui4p36fk-webfilin.vercel.app",
 
   TRADERS: "/api/traders",
 
