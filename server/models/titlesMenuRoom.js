@@ -12,7 +12,4 @@ const titlesMenuRoom = new Schema({
 });
 
 // Передаем схему в модель
-const TitlesMenuRoom = mongoose.model("titlesMenuRoom", titlesMenuRoom);
-
-// Экспортируем модель
-module.exports = TitlesMenuRoom;
+module.exports = mongoose.model("titlesMenuRoom", titlesMenuRoom);

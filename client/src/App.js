@@ -6,7 +6,7 @@ import Loader from "./components/Loader/Loader";
 import TradersRoom from "./components/TradersRoom/TradersRoom";
 import ManyTraders from "./components/ManyTraders/ManyTraders";
 import Button from "./components/Button/Button";
-import { API } from "./components/API/API";
+import API from "./components/API/API";
 
 function App() {
   const [traders, setTraders] = React.useState([]);

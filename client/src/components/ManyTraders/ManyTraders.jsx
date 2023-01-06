@@ -27,7 +27,6 @@ function ManyTraders({ limitTraders }) {
 
   async function someTraders(ev) {
     ev.preventDefault();
-    console.log(limit);
     const response = await fetch(
       server.URL + server.LIMIT_TRADERS_URL + server.QUERY_LIMIT + `${limit}`
     );

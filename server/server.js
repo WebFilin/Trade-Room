@@ -1,51 +1,29 @@
 const express = require("express");
-
 const morgan = require("morgan");
 
-const routes = require("./config/routes");
-const config = require("./config/app");
+const config = require("./config/app.js");
 
 // Mongoose - провайдер для базы данных mongoDB
 const mongoose = require("mongoose");
 
-//модель для базы данных
-const TradeShema = require("./models/traders");
-
-const TitlesMenuRoom = require("./models/titlesMenuRoom");
-
 // Политика CORS - отключаем
 const cors = require("cors");
 
-// Работа с датой
-const date = require("date-and-time");
-
-const corsOptions = {
-  origin: "*",
-  credentials: true,
-  optionSuccessStatus: 200,
-};
+// подключаем роуты
+const router = require("./router/router.js");
 
 // Сервер
 const app = express();
 
 const PORT = config.PORT;
 
-mongoose.set("strictQuery", true);
-
-// Подключаемся к БД
-mongoose
-  .connect(config.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then((res) => {
-    console.log("Connect to DB");
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
 // Управление CORS
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+
 app.use(cors(corsOptions));
 
 // Логи сервера
@@ -53,51 +31,26 @@ app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
 
-app.listen(PORT, () => {
-  console.log(`listening port ${PORT}`);
-});
+app.use("/api", router);
 
-// Получаем список участников торгов
-app.get(routes.TRADERS, (req, res) => {
-  TradeShema.find()
-    .then((result) => res.json(result))
-
-    .catch((error) => {
-      console.log(error);
-    });
-});
-
-// Получаем список участников торгов
-app.get(routes.LIMIT_TRADERS, (req, res) => {
-  const limit = req.query.limit;
-
-  TradeShema.find()
-    .then((result) => res.json(result.slice(0, limit)))
-
-    .catch((error) => {
-      console.log(error);
-    });
-});
-
-// Получаем заголовки меню комнаты торгов
-app.get(routes.TRADERS_MENU_ROOM, (req, res) => {
-  TitlesMenuRoom.find()
-    .then((result) => res.json(result))
-
-    .catch((error) => {
-      console.log(error);
-    });
-});
-
-// Заголовок торговой комнаты, дату и текст формируем сразу не сервере.
-// Дата и время актуальные
-app.get(routes.TRADERS_ROOM_TITLE, (req, res) => {
-  const titleTrade = "Тестовые торги на аппарат ЛОТОС №2033564";
-  const nowDate = new Date();
-
+// Запускаем сервер
+async function startServer() {
   try {
-    res.json(`${titleTrade} ${date.format(nowDate, "DD.MM.YYYY HH:mm")}`);
+    //  Прослушиваем порт
+    app.listen(PORT, () => {
+      console.log(`listening port ${PORT}`);
+    });
+
+    // Подключаемся к БД
+    mongoose.set("strictQuery", true);
+    mongoose.connect(config.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log("Connect to DB");
   } catch (error) {
     console.log(error);
   }
-});
+}
+startServer();

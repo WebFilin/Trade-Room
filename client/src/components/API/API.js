@@ -1,6 +1,6 @@
 import server from "../../constants/server";
 
-export async function API(query, error) {
+async function API(query, error) {
   const response = await fetch(server.URL + query);
 
   if (response.ok) {
@@ -9,3 +9,5 @@ export async function API(query, error) {
     alert(`${error} ` + response.status);
   }
 }
+
+export default API;

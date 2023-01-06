@@ -36,7 +36,4 @@ const tradeShema = new Schema({
 });
 
 // Передаем схему в модель
-const TradeShema = mongoose.model("bidders", tradeShema);
-
-// Экспортируем модель
-module.exports = TradeShema;
+module.exports = mongoose.model("bidders", tradeShema);
